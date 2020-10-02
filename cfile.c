@@ -1,125 +1,176 @@
-//Tic Tac Toe Game in C++
+cppforschool.com
+Home(current)
+Tutorial
+Assignments
+Projects
+Papers
+Quiz
+About
+Contact
 
-//Importing the inbuild libraries in CPP
+ 
+Home
+Tutorial
+Assignments
+Projects
+Papers
+Feedback
+C++ Tic Tac Toe Game
+
+ 
+
+C++ Tic Tac Toe Game Project is developed in C++ for class XI CBSE board students. Read the source code carefully to understand the working of this program.download projectdownload project
+
+Tic-tac-toe program in Python Click here
+
+
+ 
 #include <iostream>
-#include <stdlib.h>
 using namespace std;
-//Array for the board
-char board[3][3] = {{'1','2','3'},{'4','5','6'},{'7','8','9'}};
-//Variable Declaration
-int choice;
-int row,column;
-char turn = 'X';
-bool draw = false;
 
-//Function to show the current status of the gaming board
+char square[10] = {'o','1','2','3','4','5','6','7','8','9'};
 
-void display_board(){
-
-    //Rander Game Board LAYOUT
-
-    cout<<"PLAYER - 1 [X]t PLAYER - 2 [O]nn";
-    cout<<"tt     |     |     n";
-    cout<<"tt  "<<board[0][0]<<"  | "<<board[0][1]<<"  |  "<<board[0][2]<<" n";
-    cout<<"tt_____|_____|_____n";
-    cout<<"tt     |     |     n";
-    cout<<"tt  "<<board[1][0]<<"  | "<<board[1][1]<<"  |  "<<board[1][2]<<" n";
-    cout<<"tt_____|_____|_____n";
-    cout<<"tt     |     |     n";
-    cout<<"tt  "<<board[2][0]<<"  | "<<board[2][1]<<"  |  "<<board[2][2]<<" n";
-    cout<<"tt     |     |     n";
-}
-
-//Function to get the player input and update the board
-
-void player_turn(){
-    if(turn == 'X'){
-        cout<<"ntPlayer - 1 [X] turn : ";
-    }
-    else if(turn == 'O'){
-        cout<<"ntPlayer - 2 [O] turn : ";
-    }
-    //Taking input from user
-    //updating the board according to choice and reassigning the turn Start
-
-    cin>> choice;
-
-    //switch case to get which row and column will be update
-
-    switch(choice){
-        case 1: row=0; column=0; break;
-        case 2: row=0; column=1; break;
-        case 3: row=0; column=2; break;
-        case 4: row=1; column=0; break;
-        case 5: row=1; column=1; break;
-        case 6: row=1; column=2; break;
-        case 7: row=2; column=0; break;
-        case 8: row=2; column=1; break;
-        case 9: row=2; column=2; break;
-        default:
-            cout<<"Invalid Move";
-    }
-
-    if(turn == 'X' && board[row][column] != 'X' && board[row][column] != 'O'){
-        //updating the position for 'X' symbol if
-        //it is not already occupied
-        board[row][column] = 'X';
-        turn = 'O';
-    }else if(turn == 'O' && board[row][column] != 'X' && board[row][column] != 'O'){
-        //updating the position for 'O' symbol if
-        //it is not already occupied
-        board[row][column] = 'O';
-        turn = 'X';
-    }else {
-        //if input position already filled
-        cout<<"Box already filled!n Please choose another!!nn";
-        player_turn();
-    }
-    /* Ends */
-    display_board();
-}
-
-//Function to get the game status e.g. GAME WON, GAME DRAW GAME IN CONTINUE MODE
-
-bool gameover(){
-    //checking the win for Simple Rows and Simple Column
-    for(int i=0; i<3; i++)
-    if(board[i][0] == board[i][1] && board[i][0] == board[i][2] || board[0][i] == board[1][i] && board[0][i] == board[2][i])
-    return false;
-
-    //checking the win for both diagonal
-
-    if(board[0][0] == board[1][1] && board[0][0] == board[2][2] || board[0][2] == board[1][1] && board[0][2] == board[2][0])
-    return false;
-
-    //Checking the game is in continue mode or not
-    for(int i=0; i<3; i++)
-    for(int j=0; j<3; j++)
-    if(board[i][j] != 'X' && board[i][j] != 'O')
-    return true;
-
-    //Checking the if game already draw
-    draw = true;
-    return false;
-}
-
-//Program Main Method
+int checkwin();
+void board();
 
 int main()
 {
-    cout<<"tttT I C K -- T A C -- T O E -- G A M Ettt";
-    cout<<"nttttFOR 2 PLAYERSnttt";
-    while(gameover()){
-        display_board();
-        player_turn();
-        gameover();
-    }
-    if(turn == 'X' && draw == false){
-        cout<<"nnCongratulations!Player with 'X' has won the game";
-    }
-    else if(turn == 'O' && draw == false){
-        cout<<"nnCongratulations!Player with 'O' has won the game";
-    }
+	int player = 1,i,choice;
+
+    char mark;
+    do
+    {
+        board();
+        player=(player%2)?1:2;
+
+        cout << "Player " << player << ", enter a number:  ";
+        cin >> choice;
+
+        mark=(player == 1) ? 'X' : 'O';
+
+        if (choice == 1 && square[1] == '1')
+
+            square[1] = mark;
+        else if (choice == 2 && square[2] == '2')
+
+            square[2] = mark;
+        else if (choice == 3 && square[3] == '3')
+
+            square[3] = mark;
+        else if (choice == 4 && square[4] == '4')
+
+            square[4] = mark;
+        else if (choice == 5 && square[5] == '5')
+
+            square[5] = mark;
+        else if (choice == 6 && square[6] == '6')
+
+            square[6] = mark;
+        else if (choice == 7 && square[7] == '7')
+
+            square[7] = mark;
+        else if (choice == 8 && square[8] == '8')
+
+            square[8] = mark;
+        else if (choice == 9 && square[9] == '9')
+
+            square[9] = mark;
+        else
+        {
+            cout<<"Invalid move ";
+
+            player--;
+            cin.ignore();
+            cin.get();
+        }
+        i=checkwin();
+
+        player++;
+    }while(i==-1);
+    board();
+    if(i==1)
+
+        cout<<"==>\aPlayer "<<--player<<" win ";
     else
-    cout<<"nnGAME DRAW!!!nn";
-} 
+        cout<<"==>\aGame draw";
+
+    cin.ignore();
+    cin.get();
+    return 0;
+}
+
+/*********************************************
+    FUNCTION TO RETURN GAME STATUS
+    1 FOR GAME IS OVER WITH RESULT
+    -1 FOR GAME IS IN PROGRESS
+    O GAME IS OVER AND NO RESULT
+**********************************************/
+
+int checkwin()
+{
+    if (square[1] == square[2] && square[2] == square[3])
+
+        return 1;
+    else if (square[4] == square[5] && square[5] == square[6])
+
+        return 1;
+    else if (square[7] == square[8] && square[8] == square[9])
+
+        return 1;
+    else if (square[1] == square[4] && square[4] == square[7])
+
+        return 1;
+    else if (square[2] == square[5] && square[5] == square[8])
+
+        return 1;
+    else if (square[3] == square[6] && square[6] == square[9])
+
+        return 1;
+    else if (square[1] == square[5] && square[5] == square[9])
+
+        return 1;
+    else if (square[3] == square[5] && square[5] == square[7])
+
+        return 1;
+    else if (square[1] != '1' && square[2] != '2' && square[3] != '3' 
+                    && square[4] != '4' && square[5] != '5' && square[6] != '6' 
+                  && square[7] != '7' && square[8] != '8' && square[9] != '9')
+
+        return 0;
+    else
+        return -1;
+}
+
+
+/*******************************************************************
+     FUNCTION TO DRAW BOARD OF TIC TAC TOE WITH PLAYERS MARK
+********************************************************************/
+
+
+void board()
+{
+    system("cls");
+    cout << "\n\n\tTic Tac Toe\n\n";
+
+    cout << "Player 1 (X)  -  Player 2 (O)" << endl << endl;
+    cout << endl;
+
+    cout << "     |     |     " << endl;
+    cout << "  " << square[1] << "  |  " << square[2] << "  |  " << square[3] << endl;
+
+    cout << "_____|_____|_____" << endl;
+    cout << "     |     |     " << endl;
+
+    cout << "  " << square[4] << "  |  " << square[5] << "  |  " << square[6] << endl;
+
+    cout << "_____|_____|_____" << endl;
+    cout << "     |     |     " << endl;
+
+    cout << "  " << square[7] << "  |  " << square[8] << "  |  " << square[9] << endl;
+
+    cout << "     |     |     " << endl << endl;
+}
+
+/*******************************************************************
+                END OF PROJECT
+********************************************************************/
